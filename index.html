@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hypothyroidism – Harrison's Ch.383</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--tx:#1b2430;--mu:#5b6776;--pr:#0f766e;--pr2:#e6f4f2;--bd:#dbe2ea;--wa:#b45309;--wb:#fef3c7;--rd:#b91c1c;--rb:#fee2e2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1720;--card:#17212c;--tx:#e8edf3;--mu:#9aa7b6;--pr:#2dd4bf;--pr2:#123a38;--bd:#2a3846;--wa:#fbbf24;--wb:#3a2f10;--rd:#fca5a5;--rb:#3b1717}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:var(--pr);color:#fff;padding:14px 16px}header h1{margin:0;font-size:18px}header p{margin:2px 0 0;font-size:12px;opacity:.9}
+nav{display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:var(--card);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:5}
+nav button{flex:none;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 14px;border-radius:20px;font-size:14px}
+nav button.on{background:var(--pr);color:#fff;border-color:var(--pr)}
+main{max-width:760px;margin:0 auto;padding:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:12px}
+h2{font-size:17px;margin:0 0 8px}h3{font-size:15px;margin:12px 0 4px;color:var(--pr)}
+.chk{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--bd)}.chk:last-child{border:0}
+label{display:block;font-size:13px;color:var(--mu);margin:8px 0 3px}
+select,input{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font-size:15px}
+input[type=checkbox]{width:auto;margin-top:4px}
+.btn{background:var(--pr);color:#fff;border:0;padding:11px 16px;border-radius:8px;font-size:15px;margin-top:10px;width:100%}
+.res{border-left:4px solid var(--pr);background:var(--pr2);padding:10px 12px;border-radius:8px;margin-top:10px}
+.warn{border-left-color:var(--wa);background:var(--wb)}.bad{border-left-color:var(--rd);background:var(--rb)}
+ul{padding-left:20px;margin:4px 0}li{margin:3px 0}
+details{border:1px solid var(--bd);border-radius:10px;padding:10px 12px;margin-bottom:8px;background:var(--card)}summary{font-weight:600;cursor:pointer}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{border-bottom:1px solid var(--bd);padding:6px;text-align:left;vertical-align:top}th{color:var(--pr)}
+.sm{font-size:12px;color:var(--mu)}.opt{padding:10px;border:1px solid var(--bd);border-radius:8px;margin:6px 0;background:var(--bg);width:100%;text-align:left;color:var(--tx);font-size:14px}
+.opt.ok{background:var(--pr2);border-color:var(--pr)}.opt.no{background:var(--rb);border-color:var(--rd)}
+</style></head><body>
+<header><h1>Hypothyroidism</h1><p>Harrison's Principles of Internal Medicine · Ch.383 · Jameson, Mandel, Weetman</p></header>
+<nav id="nav"></nav><main id="app"></main>
+<script>
+const T=['Assessment','Pathophysiology','Learn','Treatment','Quiz'];let cur=0;
+const nav=document.getElementById('nav'),app=document.getElementById('app');
+function renderNav(){nav.innerHTML='';T.forEach((t,i)=>{const b=document.createElement('button');b.textContent=t;b.className=i==cur?'on':'';b.onclick=()=>{cur=i;go()};nav.appendChild(b)})}
+function go(){renderNav();app.innerHTML=[assess,patho,learn,treat,quiz][cur]();window.scrollTo(0,0);if(cur==0)bindA();if(cur==4)bindQ()}
+const SYM=['Tiredness, weakness','Dry skin','Feeling cold','Hair loss','Poor concentration / memory','Constipation','Weight gain with poor appetite','Dyspnea','Hoarse voice','Menorrhagia / oligomenorrhea','Paresthesia','Impaired hearing'];
+const SGN=['Dry coarse skin, cool extremities','Puffy face, hands, feet (myxedema)','Diffuse alopecia','Bradycardia','Peripheral edema','Delayed tendon reflex relaxation','Carpal tunnel syndrome','Serous cavity effusions','Goiter (firm, irregular)'];
+function assess(){return `<div class="card"><h2>Clinical features</h2><p class="sm">Tick what is present (Table 383-3).</p><h3>Symptoms</h3>${SYM.map((s,i)=>`<div class="chk"><input type="checkbox" class="s" id="s${i}"><label for="s${i}" style="margin:0;color:inherit">${s}</label></div>`).join('')}<h3>Signs</h3>${SGN.map((s,i)=>`<div class="chk"><input type="checkbox" class="g" id="g${i}"><label for="g${i}" style="margin:0;color:inherit">${s}</label></div>`).join('')}</div>
+<div class="card"><h2>Laboratory</h2>
+<label>TSH</label><select id="tsh"><option value="">Select</option><option value="hi">Elevated</option><option value="no">Normal</option><option value="lo">Low</option></select>
+<label>Unbound (free) T4</label><select id="ft4"><option value="">Select / not done</option><option value="no">Normal</option><option value="lo">Low</option><option value="hi">High</option></select>
+<label>TPO antibodies</label><select id="tpo"><option value="">Select / not done</option><option value="p">Positive</option><option value="n">Negative</option></select>
+<label>Pituitary/hypothalamic disease suspected? (surgery, tumor, Sheehan, other pituitary deficits)</label><select id="pit"><option value="n">No</option><option value="y">Yes</option></select>
+<label>TSH value if elevated (mIU/L, optional)</label><input id="tv" type="number" step="0.1" placeholder="e.g. 12">
+<label>Special situation</label><select id="sp"><option value="">None</option><option value="preg">Pregnant / planning pregnancy</option><option value="old">Age &gt;60 or known heart disease</option><option value="rai">Recent radioiodine / thyroidectomy</option><option value="drug">On amiodarone, lithium, TKI, checkpoint inhibitor, interferon</option></select>
+<button class="btn" id="go">Assess</button><div id="out"></div></div>`}
+function bindA(){document.getElementById('go').onclick=()=>{const v=id=>document.getElementById(id).value;const tsh=v('tsh'),ft4=v('ft4'),tpo=v('tpo'),pit=v('pit'),tv=parseFloat(v('tv')),sp=v('sp');
+const ns=[...document.querySelectorAll('.s:checked')].length,ng=[...document.querySelectorAll('.g:checked')].length;let h='',cls='';
+if(!tsh){document.getElementById('out').innerHTML='<div class="res warn">Select TSH first (Fig 383-2: measure TSH).</div>';return}
+if(tsh=='hi'){
+ if(ft4=='no'){h=`<b>Subclinical (mild) hypothyroidism</b><br>Elevated TSH with normal unbound T4.${tpo=='p'?' TPO-positive → autoimmune; annual risk of overt disease ~4%.':''}<ul><li>${(tpo=='p'&&ns>0)?'TPO+ and symptomatic → consider T4 trial.':'No/limited symptoms → annual follow-up.'}</li><li>Confirm elevation is sustained over 3 months before treating.</li><li>${tv>10?'<b>TSH &gt;10 mIU/L</b> → LT4 recommended.':'Treat if pregnant/planning pregnancy or TSH &gt;10.'}</li></ul>`;cls='warn'}
+ else if(ft4=='lo'){h=`<b>Primary (clinical) hypothyroidism</b><ul><li>${tpo=='p'?'TPO+ → autoimmune (Hashimoto\'s / atrophic) hypothyroidism → start T4 treatment.':tpo=='n'?'TPO− → rule out other causes (iatrogenic, drugs, iodine excess/deficiency, infiltrative, congenital).':'Check TPO antibodies (positive in &gt;95% of autoimmune cases).'}</li><li>Symptom load: ${ns} symptoms, ${ng} signs.</li><li>Check lipids, CK, CBC (cholesterol/CK↑, anemia may occur).</li></ul>`;cls='bad'}
+ else h='Elevated TSH: measure unbound T4 to distinguish subclinical from overt (T3 not indicated; T3 often normal).';
+}else if(tsh=='no'){
+ if(pit=='n')h='<b>Normal TSH excludes primary hypothyroidism.</b> No further tests unless pituitary disease suspected.';
+ else if(ft4=='lo'){h='<b>Probable secondary (central) hypothyroidism</b><ul><li>Low unbound T4 with normal/low/slightly high TSH (bioinactive TSH).</li><li>Rule out drug effects and sick euthyroid syndrome, then evaluate anterior pituitary function.</li></ul>';cls='bad'}
+ else if(ft4=='no')h='Normal TSH and normal unbound T4: no further tests.';else h='Normal TSH, pituitary disease suspected: measure unbound T4.';
+}else h='Low TSH: consider thyrotoxicosis or over-replacement. In suspected central disease, low T4 with low TSH = secondary hypothyroidism. (Patients with suppressed TSH on LT4 have ↑ risk of AF and bone loss.)';
+if(sp=='preg')h+='<div class="res warn" style="margin-top:8px"><b>Pregnancy:</b> target TSH &lt;2.5 mIU/L before conception; increase LT4 ~nine doses/week as soon as pregnancy confirmed; monitor q4 weeks first half.</div>';
+if(sp=='old')h+='<div class="res warn" style="margin-top:8px"><b>Elderly/CAD:</b> start LT4 12.5–25 µg/d, increase every 2–3 months.</div>';
+if(sp=='rai')h+='<div class="res warn" style="margin-top:8px"><b>Post-RAI/thyroidectomy:</b> hypothyroidism may be transient 3–4 months; unbound T4 is a better guide than TSH.</div>';
+if(sp=='drug')h+='<div class="res warn" style="margin-top:8px"><b>Drug-induced:</b> amiodarone (iodine), lithium, TKIs, checkpoint inhibitors, interferon-α can cause thyroiditis/hypothyroidism.</div>';
+if(ng>=4&&ns>=4)h+='<div class="res bad" style="margin-top:8px">High clinical burden. If hypothermia, ↓consciousness or seizures → think <b>myxedema coma</b> (see Treatment).</div>';
+document.getElementById('out').innerHTML=`<div class="res ${cls}">${h}</div><p class="sm">Educational tool based on Harrison's; not a substitute for clinical judgment.</p>`}}
+function patho(){return `<div class="card"><h2>Causes (Table 383-1)</h2><h3>Primary</h3><ul><li>Autoimmune: Hashimoto's, atrophic thyroiditis</li><li>Iatrogenic: ¹³¹I, thyroidectomy, neck irradiation</li><li>Drugs: iodine excess, amiodarone, lithium, antithyroid drugs, interferon-α, TKIs, checkpoint inhibitors</li><li>Congenital, iodine deficiency, infiltrative (amyloid, sarcoid, hemochromatosis, scleroderma, Riedel's)</li></ul><h3>Transient</h3><ul><li>Silent / postpartum / subacute thyroiditis; stopping suprasuppressive T4; after ¹³¹I or subtotal thyroidectomy for Graves'</li></ul><h3>Secondary</h3><ul><li>Hypopituitarism (tumor, surgery, Sheehan, infiltrative), isolated TSH deficiency, bexarotene, hypothalamic disease</li></ul></div>
+<div class="card"><h2>Autoimmune mechanism</h2><ul><li><b>Hashimoto's:</b> lymphocytic infiltrate with germinal centers, follicle atrophy, oxyphil metaplasia, absent colloid, mild–moderate fibrosis. <b>Atrophic:</b> more fibrosis, less infiltrate; probably end-stage.</li><li><b>Genetics:</b> HLA-DR3, DR4, DR5; CTLA-4. Linked to T1DM, Addison's, pernicious anemia, vitiligo; Turner and Down syndromes.</li><li><b>Environment:</b> high iodine or low selenium intake ↑ risk; alcohol protective; smoking cessation transiently ↑ incidence.</li><li><b>Effector:</b> CD8+ cytotoxic T cells; cytokines (TNF, IL-1, IFN-γ) induce Fas-mediated apoptosis.</li><li><b>Antibodies:</b> TPO and Tg (markers, secondary role); TSH-R blocking antibodies in up to 20% (thyroid atrophy, transient neonatal hypothyroidism).</li></ul></div>
+<div class="card"><h2>Systemic effects</h2><ul><li><b>Skin:</b> glycosaminoglycan accumulation → non-pitting myxedema; carotene → yellow tinge; dry, decreased sweating.</li><li><b>Heart:</b> ↓contractility and rate, ↑peripheral resistance (diastolic HTN), pericardial effusion up to 30%.</li><li><b>Neuromuscular:</b> carpal tunnel, slow reflex relaxation, myopathy, impaired memory.</li><li><b>Reproductive:</b> menorrhagia then oligo/amenorrhea, ↓fertility, ↑miscarriage, ↑prolactin.</li><li><b>Other:</b> weight gain from fluid retention (modest), hoarse voice, conductive deafness, anemia, ↑cholesterol/CK.</li></ul></div>
+<div class="card"><h2>Congenital (Table 383-2)</h2><p>~1 in 2000–4000 births: dysgenesis 65%, dyshormonogenesis 30%, TSH-R antibody 5%. Genes: PROP-1, PIT-1 (central); TTF-1, TTF-2, PAX-8, NKX2 (dysgenesis); NIS, DUOX2, TPO, Tg, pendrin (dyshormonogenesis).</p></div>`}
+function learn(){return `<div class="card"><h2>Key facts</h2>
+<details><summary>Epidemiology</summary><ul><li>Iodine deficiency commonest cause worldwide; Hashimoto's in iodine-sufficient areas.</li><li>Annual incidence up to 4/1000 women, 1/1000 men; mean age at diagnosis 60.</li><li>Subclinical: 6–8% of women (10% over 60), 3% of men.</li></ul></details>
+<details><summary>Clinical features by group</summary><ul><li><b>Hashimoto's:</b> often goiter, firm and irregular; rarely painful.</li><li><b>Atrophic:</b> overt symptoms; onset insidious.</li><li><b>Children:</b> slow growth, delayed dental maturation, delayed/precocious puberty; intellectual impairment if onset &lt;3 years.</li><li>Associated: PGA type 2 (autoimmune thyroid 70–75%, T1DM 40–60%, Addison's 40–50%).</li></ul></details>
+<details><summary>Laboratory interpretation</summary><ul><li>TSH is the screening test; normal TSH excludes primary (not secondary) disease.</li><li>Elevated TSH → free T4. T4 is inferior to TSH for screening (misses subclinical).</li><li>T3 normal in ~25% (deiodinase adaptation) – not indicated.</li><li>TPO Ab positive in &gt;95% autoimmune; TBII in 10–20%, not routine.</li><li>Other: ↑CK, ↑cholesterol and triglycerides, normo/macrocytic anemia.</li></ul></details>
+<details><summary>Differential diagnosis</summary><p>Asymmetric Hashimoto's goiter vs multinodular goiter or thyroid carcinoma: ultrasound; FNA for focal nodules.</p></details>
+<details><summary>Other causes</summary><ul><li><b>Iatrogenic:</b> transient hypothyroidism 3–4 months after RAI for Graves'; use unbound T4 early.</li><li><b>Iodine deficiency:</b> endemic goiter/cretinism; iodized salt, bread, or oil.</li><li><b>Iodine excess:</b> amiodarone; autoimmune thyroiditis patients susceptible.</li><li><b>Secondary:</b> diagnosed with low unbound T4; monitor by T4 (upper half of range), not TSH.</li></ul></details>
+<details><summary>Congenital hypothyroidism</summary><ul><li>Most infants normal at birth; neonatal heel-prick TSH/T4 screening.</li><li>Features: prolonged jaundice, feeding problems, hypotonia, large tongue, delayed bone maturation, umbilical hernia. Cardiac malformations 4× commoner.</li><li>Neurologic damage if treatment delayed.</li></ul></details></div>
+<div class="card"><h2>Signs &amp; symptoms (Table 383-3)</h2><table><tr><th>Symptoms</th><th>Signs</th></tr><tr><td>${SYM.join('<br>')}</td><td>${SGN.slice(0,8).join('<br>')}</td></tr></table></div>`}
+function treat(){return `<div class="card"><h2>Clinical hypothyroidism</h2><ul><li><b>Full replacement LT4:</b> 1.6 µg/kg/day (typically 100–150 µg), ≥30 min before breakfast.</li><li>Residual function / post-Graves' therapy: 75–125 µg/day may suffice.</li><li>Adults &lt;60 without heart disease: may start 50–100 µg.</li><li>Elderly / CAD: start 12.5–25 µg, ↑ every 2–3 months; need ~20% less.</li></ul>
+<h3>Monitoring</h3><ul><li>TSH 2 months after any dose change; goal normal TSH, ideally lower half of range.</li><li>Adjust by 12.5–25 µg steps (same-size decrements if suppressed).</li><li>Symptom relief takes 3–6 months after TSH normalizes.</li><li>Stable: annual TSH. Central hypothyroidism: target unbound T4 in upper half of range.</li><li>10–15% have persistent symptoms despite euthyroidism (reason unclear).</li></ul>
+<h3>Not recommended</h3><ul><li>T3 alone or LT4+T3 combination (no proven benefit); desiccated thyroid extract.</li></ul></div>
+<div class="card"><h2>If TSH is high on adequate dose</h2><ul><li>Poor adherence (esp. ≥200 µg/day): missed doses may be taken as two together (T4 half-life 7 days).</li><li>Malabsorption: celiac, atrophic gastritis, H. pylori, small-bowel surgery.</li><li>Interfering drugs: oral estrogens, SERMs, bile acid sequestrants, ferrous sulfate, calcium, sevelamer, sucralfate, PPIs, aluminum hydroxide, rifampicin, amiodarone, carbamazepine, phenytoin, TKIs.</li></ul></div>
+<div class="card"><h2>Subclinical hypothyroidism</h2><ul><li>Treat if pregnant/planning, or TSH &gt;10 mIU/L.</li><li>Consider trial in young/middle-aged with symptoms or cardiac risk.</li><li>Confirm persistence for 3 months. Start LT4 25–50 µg/day.</li></ul></div>
+<div class="card"><h2>Special situations</h2><h3>Pregnancy</h3><ul><li>Target TSH &lt;2.5 mIU/L pre-conception; LT4 ↑ ~45% (nine doses/week) when pregnancy confirmed.</li><li>Check TSH every 4 weeks in first half, then every 6–8 weeks; goal lower half of trimester range or &lt;2.5.</li><li>Return to pre-pregnancy dose after delivery; separate prenatal vitamins/iron from LT4.</li></ul><h3>Surgery</h3><p>Emergency surgery generally safe; defer routine surgery until euthyroid.</p><h3>Children</h3><p>Pseudotumor cerebri rarely after LT4 start. Congenital: 10–15 µg/kg/day, titrate to TSH; reassess at age 3 if unclear.</p></div>
+<div class="card"><h2 style="color:var(--rd)">Myxedema coma</h2><p>Mortality 20–40%. Elderly, precipitated by drugs (sedatives, anesthetics), infection, MI, CHF, GI bleed, stroke, cold exposure. Hypothermia, ↓consciousness, seizures.</p><ul><li><b>LT4 IV:</b> 200–400 µg loading, then 1.6 µg/kg/day (25% less if IV). Consider liothyronine 5–20 µg load then 2.5–10 µg q8h (lower dose in elderly / cardiac risk).</li><li><b>Hydrocortisone 50 mg q6h</b> (adrenal reserve impaired).</li><li>Treat precipitants, early broad-spectrum antibiotics after cultures.</li><li>Ventilatory support; ABG monitoring first 48 h.</li><li>Passive rewarming only unless temp &lt;30°C; avoid hypotonic fluids; hypertonic saline or IV glucose if severe hyponatremia/hypoglycemia.</li><li>Avoid sedatives; reduce drug doses.</li></ul></div>
+<p class="sm">Reference: Harrison's 21st ed. Ch.383. Verify doses with current guidelines before clinical use.</p>`}
+const Q=[{q:'First test for suspected primary hypothyroidism?',o:['Free T3','TSH','TPO antibodies','Thyroid ultrasound'],a:1,e:'Normal TSH excludes primary (not secondary) hypothyroidism.'},
+{q:'Typical full LT4 replacement dose in adults?',o:['0.5 µg/kg','1.6 µg/kg','3 µg/kg','5 µg/kg'],a:1,e:'~100–150 µg/day, taken ≥30 min before breakfast.'},
+{q:'When to recheck TSH after a dose change?',o:['1 week','2 weeks','~2 months','1 year'],a:2,e:'TSH responses are gradual.'},
+{q:'Most common cause in iodine-sufficient regions?',o:['Hashimoto\'s thyroiditis','Iodine deficiency','Amiodarone','Sheehan syndrome'],a:0,e:'Autoimmune disease or iatrogenic causes.'},
+{q:'Which drug combination is NOT recommended long-term?',o:['LT4 alone','LT4 + T3 / liothyronine alone','LT4 + iron separated','LT4 with water'],a:1,e:'No proven benefit; T3 has short half-life causing fluctuation.'},
+{q:'Pregnant woman on LT4, pregnancy confirmed – action?',o:['Stop LT4','Same dose','Increase ~nine doses/week','Switch to T3'],a:2,e:'Requirements rise ~45%.'},
+{q:'Myxedema coma: adjunct besides LT4?',o:['Hypotonic fluids','Hydrocortisone 50 mg q6h','Sedatives','Active external warming'],a:1,e:'Impaired adrenal reserve; avoid hypotonic fluids and sedatives.'},
+{q:'Central hypothyroidism is monitored by?',o:['TSH','Unbound T4 in upper half of range','TPO','T3'],a:1,e:'TSH cannot be used.'}];
+let qi=0,sc=0;
+function quiz(){return '<div id="qz"></div>'}
+function bindQ(){qi=0;sc=0;showQ()}
+function showQ(){const z=document.getElementById('qz');if(qi>=Q.length){z.innerHTML=`<div class="card"><h2>Score ${sc}/${Q.length}</h2><button class="btn" onclick="bindQ()">Retry</button></div>`;return}
+const q=Q[qi];z.innerHTML=`<div class="card"><p class="sm">Question ${qi+1}/${Q.length}</p><h2>${q.q}</h2>${q.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}<div id="ex"></div></div>`;
+z.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;z.querySelectorAll('.opt').forEach((x,j)=>{x.disabled=true;if(j==q.a)x.classList.add('ok')});if(i==q.a)sc++;else b.classList.add('no');
+document.getElementById('ex').innerHTML=`<div class="res">${q.e}</div><button class="btn" id="nx">Next</button>`;document.getElementById('nx').onclick=()=>{qi++;showQ()}})}
+go();
+</script></body></html>
